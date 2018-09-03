@@ -62,6 +62,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $list = collect([
+            [ 'id' => 1, 'name' => 'Jane' ],
+            [ 'id' => 2, 'name' => 'John' ],
+        ]);
+        (new FastExcel($list))->export('file.xlsx');
+
+        $users = User::all();
+        (new FastExcel($users))->export('file.xlsx');
+        dd($users);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
